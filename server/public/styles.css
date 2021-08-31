@@ -1,0 +1,36 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.main {
+  min-height: 100vh;
+}
+
+.title {
+  text-align: center;
+}
+
+.formi {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.formi label {
+  display: block;
+}
+
+.formi button {
+  display: block;
+  cursor: pointer;
+}
+
+.formi input {
+  margin-bottom: 1rem;
+}

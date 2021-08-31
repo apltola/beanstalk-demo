@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: passu
+      POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db-dumps/pg:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  server:
+    depends_on:
+      - 'db'
+    restart: always
+    volumes:
+      - ./server:/app
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    ports:
+      - 80:5000
+    environment:
+      - PGUSER=postgres
+      - PGHOST=db
+      - PGPASSWORD=passu
+      - PGDATABASE=my_db
+      - PGPORT=5432
