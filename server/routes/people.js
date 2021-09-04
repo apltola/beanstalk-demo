@@ -1,11 +1,16 @@
 const { Router } = require('express');
-const { pgClient } = require('../db/client');
+const { pool } = require('../db/client');
 
 const router = Router();
 
 router.get('/people', async (req, res) => {
-  const { rows } = await pgClient.query('SELECT * FROM PEOPLE');
-  res.json(rows);
+  try {
+    const { rows } = await pool.query('SELECT * FROM PEOPLE');
+    return res.json(rows);
+  } catch (error) {
+    console.log('get people error', error);
+    return {};
+  }
 });
 
 router.post('/people', async (req, res) => {
@@ -15,7 +20,7 @@ router.post('/people', async (req, res) => {
 
   let rows = [];
   try {
-    const res = await pgClient.query(
+    const res = await pool.query(
       'INSERT INTO people(name, age) VALUES($1, $2) RETURNING *',
       [name, parseInt(age)]
     );

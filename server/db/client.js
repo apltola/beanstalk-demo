@@ -1,17 +1,16 @@
-const { Pool, Client } = require('pg');
+const { Pool } = require('pg');
 
-const pgClient = new Client();
+const pool = new Pool();
 
-const connectToDb = async () => {
+/* const connectToDb = async () => {
   try {
     await pgClient.connect();
     console.log('🗄 CONNECTED TO POSTGRES');
   } catch (err) {
     console.log('😣 DB CONNECTION FAILED');
   }
-};
+}; */
 
 module.exports = {
-  pgClient,
-  connectToDb,
+  pool,
 };
