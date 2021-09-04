@@ -1,11 +1,12 @@
 const express = require('express');
-// const { peopleRouter } = require('./routes/people');
+const { pool } = require('./db/client');
+const { peopleRouter } = require('./routes/people');
 
 const app = express();
 
 app.use(express.static('public'));
 app.use(express.json());
-// app.use(peopleRouter);
+app.use(peopleRouter);
 
 app.get('/envit', (req, res) => {
   res.json({
@@ -22,6 +23,8 @@ app.listen(PORT, () => {
   console.log('server listening at', PORT);
 });
 
-/* pool.query('SELECT * FROM people', (err, res) => {
-  console.log('* from people => ', res.rows);
-}); */
+pool.query('SELECT * FROM people', (err, res) => {
+  if (res.rows) {
+    console.log('* from people => ', res.rows);
+  }
+});

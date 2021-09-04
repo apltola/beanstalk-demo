@@ -23,8 +23,8 @@ services:
     ports:
       - 3000:5000
     environment:
-      - PGUSER=postgres
       - PGHOST=db
+      - PGPORT=5432
+      - PGUSER=postgres
       - PGPASSWORD=passu
       - PGDATABASE=my_db
-      - PGPORT=5432
