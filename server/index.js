@@ -27,4 +27,5 @@ pool.query('SELECT * FROM people', (err, res) => {
   if (res.rows) {
     console.log('* from people => ', res.rows);
   }
+  console.log('hello');
 });
