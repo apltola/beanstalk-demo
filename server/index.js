@@ -1,6 +1,6 @@
 const express = require('express');
 const { peopleRouter } = require('./routes/people');
-const { pgClient, connectToDb } = require('./db/client');
+const { connectToDb } = require('./db/client');
 
 const app = express();
 

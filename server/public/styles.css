@@ -1,5 +1,6 @@
 html {
   font-size: 16px;
+  color: rgb(27, 27, 27);
 }
 
 body {
@@ -33,4 +34,23 @@ body {
 
 .formi input {
   margin-bottom: 1rem;
+}
+
+#people {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#people div {
+  min-width: 153px;
+  padding-top: 1em;
+}
+
+#people ul {
+  padding-left: 1em;
+}
+
+#people ul li {
+  padding-bottom: 0.5em;
 }

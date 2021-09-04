@@ -9,8 +9,21 @@ router.get('/people', async (req, res) => {
 });
 
 router.post('/people', async (req, res) => {
-  console.log('req', req.body);
-  res.json(req.body);
+  const { name, age } = req.body;
+  if (!name || !age)
+    return res.status(400).send({ error: 'invalid request body' });
+
+  let rows = [];
+  try {
+    const res = await pgClient.query(
+      'INSERT INTO people(name, age) VALUES($1, $2) RETURNING *',
+      [name, parseInt(age)]
+    );
+    rows = res.rows;
+  } catch (error) {
+    console.log(error);
+  }
+  res.json(rows);
 });
 
 module.exports = { peopleRouter: router };

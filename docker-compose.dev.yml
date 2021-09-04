@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: postgres
+    image: postgres:latest
     restart: always
     environment:
       POSTGRES_PASSWORD: passu
@@ -12,23 +12,16 @@ services:
     volumes:
       - ./db-dumps/pg:/var/lib/postgresql/data
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-
   server:
     depends_on:
       - 'db'
-    restart: always
     volumes:
       - ./server:/app
     build:
       context: ./server
       dockerfile: Dockerfile.dev
     ports:
-      - 80:5000
+      - 3000:5000
     environment:
       - PGUSER=postgres
       - PGHOST=db
